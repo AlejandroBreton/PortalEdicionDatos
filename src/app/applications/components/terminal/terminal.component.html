@@ -1,4 +1,12 @@
-<h1 style="text-align: center;">Terminal SQL Server</h1>
-<p>Ingresa Query y presiona enter</p>
+<div class="">
+    <p-menubar [model]="items">
+        <ng-template pTemplate="end">
+        </ng-template>
+    </p-menubar>
+</div>
 
-<p-terminal welcomeMessage="Welcome to PED" prompt="Query $"></p-terminal>
+<h1 style="text-align: center;">Terminal SQL Server</h1>
+
+<div style="width: 80%; position: relative; left: 10%;">
+    <p-terminal welcomeMessage="Welcome to PED" prompt="Query $"></p-terminal>
+</div>

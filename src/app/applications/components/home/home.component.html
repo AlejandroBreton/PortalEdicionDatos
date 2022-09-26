@@ -1,26 +1,34 @@
 
-<p-menubar [model]="items">
-    <ng-template pTemplate="end">
-    </ng-template>
-</p-menubar>
+<div class="">
+	<p-menubar [model]="items">
+		<ng-template pTemplate="end">
+		</ng-template>
+	</p-menubar>
+</div>	
+
+<br>
 
 	<div class="p-field p-col-6 p-md-4">
     	<label for="icon">Ingresa el rango de fechas de consulta</label>
-    	<p-calendar [(ngModel)]="rangeDates" selectionMode="range" [readonlyInput]="true" inputId="range"></p-calendar>
+    	<p-calendar [(ngModel)]="rangeDates" selectionMode="range" [readonlyInput]="true" inputId="range" style="padding-left: 1%; width: 40%;"></p-calendar>
+
+		<p-button label="Consutar" styleClass="p-button-rounded p-button-success mr-2 mb-2" style="padding-left: 1%;"></p-button>
+
   	</div>
 
-<h5>Tabla de consulta</h5>
-<p>Tabla Informativa</p>
+<h4 class="title_table"><b>Tabla de consulta</b></h4>
+
+<div class="" style="width: 92%; position: relative; left: 4%;">
 
 <p-table #dt [value]="dummyObject" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
 	[rowsPerPageOptions]="[10,25,50]" styleClass="p-datatable-customers p-datatable-gridlines"
 	[paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-	[globalFilterFields]="['id','nombre','edad','color','activo']">
+	[globalFilterFields]="['pais','canal','sucursal','estatus','fechaActualizacion']">
 	<ng-template pTemplate="caption">
 		<div class="p-d-flex">
 			<span class="p-input-icon-left p-ml-auto">
-                <i class="pi pi-search"></i>
-                <input pInputText type="text" (input)="fnApplyFilterGlobal($event, 'contains', dt)"  placeholder="Search keyword" />
+                <!--<i class="pi pi-search"></i>-->
+                <input pInputText type="text" (input)="fnApplyFilterGlobal($event, 'contains', dt)"  placeholder="BUSCAR" />
             </span>
 		</div>
 	</ng-template>
@@ -28,64 +36,102 @@
 		<tr>
 			<th>
 				<div class="p-d-flex p-jc-between p-ai-center">
-					ID
-					<p-columnFilter type="text" field="id" display="menu"></p-columnFilter>
+					Pais
+					<p-columnFilter type="text" field="pais" display="menu"></p-columnFilter>
 				</div>
 			</th>
 			<th>
 				<div class="p-d-flex p-jc-between p-ai-center">
-					Nombre
-					<p-columnFilter type="text" field="nombre" display="menu"></p-columnFilter>
+					Canal
+					<p-columnFilter type="text" field="canal" display="menu"></p-columnFilter>
 				</div>
 			</th>
 			<th>
 				<div class="p-d-flex p-jc-between p-ai-center">
-					Edad
-					<p-columnFilter type="numeric" field="edad" display="menu"></p-columnFilter>
+					Sucursal
+					<p-columnFilter type="numeric" field="sucursal" display="menu"></p-columnFilter>
 				</div>
 			</th>
 			<th>
 				<div class="p-d-flex p-jc-between p-ai-center">
-					Color
-					<p-columnFilter type="text" field="color" display="menu"></p-columnFilter>
+					Estatus
+					<p-columnFilter type="text" field="estatus" display="menu"></p-columnFilter>
 				</div>
-			</th>
+            </th>
+			
             <th>
 				<div class="p-d-flex p-jc-between p-ai-center">
-					Activo
-					<p-columnFilter type="boolean" field="activo" display="menu"></p-columnFilter>
+					Fecha
+					<p-columnFilter type="text" field="fechaActualizacion" display="menu"></p-columnFilter>
 				</div>
 			</th>
 			
 		</tr>
 	</ng-template>
-	<ng-template pTemplate="body" let-customer>
-		<tr>
-			<td>
-				{{customer.id}}
-			</td>
-			<td>
-				{{customer.nombre}}
-			</td>
-			<td>
-				{{customer.edad}}
-			</td>
-			<td>
-				{{customer.color}}
-			</td>
-			<td>
-				{{customer.activo}}
-			</td>
-		</tr>
-	</ng-template>
+
+		<ng-template pTemplate="body" let-customer>
+			<tr>
+				<td>
+					<div [ngSwitch]="customer.pais">
+						<div *ngSwitchCase="'02'">
+							<img style="width: 27px; height: 27px;" alt="Guatemala" src="data:image/png;base64,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"/>
+						- Guatemala
+						</div>
+						<div *ngSwitchCase="'04'">
+							<img style="width: 27px; height: 27px;" alt="Honduras" src="data:image/png;base64,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"/>
+						- Honduras
+						</div>
+						<div *ngSwitchCase="'06'">
+							<img style="width: 27px; height: 27px;" alt="Peru" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAABmJLR0QA/wD/AP+gvaeTAAAGW0lEQVR4nO2dW29UVRiGn2+KHErpSMEzRRE5VIxAuDDAdFKkIMSgQQzGYDAaFYGooBfqDzDqhYoEBPSCSNREiSCQSDhapwXiBRFIKFQiKCBRgUILVCid+bygRmOAfVp7z3T2eq6/w9v9zprutddae8BisVgsFovFYrHEDcm3gOvR2travz2Xu5+cDEe4FxiuSP8E2kfhRqCsM/S8wNkcck7Qk0ATSiMJPdg9kdhXXl5+Kn9/xfUpKAOOHdNepeWtabJai0itwkiCa1SBvahuJcGWtnPJ+spK+cuEXhMUhAEnz54dIyqzgVlAv5DbtQLrEF3VL5ncJiIacr/rkjcDtIaeZHnm9IaWl1Cq8iJCONBvWnIxZayUjVzKh4RE1A11Kj00xatkOQx8lLeLD3T2XsZ5Dms1C3UE3aOWEKkBmmIa59mP8B5wW5S9HbgdeJ8KDmmK2VE2jsQAreFWreYbhPXA4Ch6+mQgwqdazUYdyx1RNAzdAE3xJFkagUfD7mWQKXRjn6aZGXaj0AzQGrppmncQvgD6htUnRCpQvtQ0K8L83xCKATqRfmSpQ3k9jPqRorxABdt0LBVhlDdugI7jTi7RAIw3XTuPpOhGg6YYaLqwUQM0zRC6sQNhuMm6BUIVwg4dZ/YmwpgBmqYSZTMazd1DnhhACd9pDXeZKmjEAK2hP8p2MCesgKkkyyadaOaRSWADdAw30MFXwD0G9HQVhnKJtSbujoKPgFKWIkwIXKerIVRTwaKgZQIZoNXMAJ4PKqILM1fTPBGkgG8DOm/JPgnSvChQlmmaSr/p/kdAgiV0zRmuafoCK/wm+zJAq3kcZZrfpkWHMlVTTPeT6tkAraEn8IGfZkWNsEin0sNrmvcRkGM+MMBzXvEzkAu86DXJkwFaQ1lRPGALixxv6mR6e0nxNgI6eBa4yVNOnBBuoY2nvaS4NkBBEOZ5VxUzhAXq4bq6HwHjmQIM86MpZgwhTa3bYPcGCE/5khNPZrkNdGWAjqEU4RH/emKGMl3H0stNqLsRUMpk/t2HaXGmDyXuvobcGSBMCiQnjri8Zu4MUGuAD8yMAB3HzcCQwHLiR5WbVTPnEVDCaCNy4kg7o5xC3HwFjTQgJZ6I84fX2QCxky/fKEOdQpwNyPlf7bE4Xzs3I8A+evaPAQPCPzJUzDjuJ3VjgKspteWqlDoFWAPCxYgBlhBxY0DBnKntgrQ5BVgDwsWIAacNCIkrzU4Bbgw4ZkBIPBGOOoU4G6DWgAA4Xjs3M+GfjEiJIzmanEKcDUjwoxExcSTBHucQJ3LORSzX4LIBA6Sek2C/hnzQKLvM3AWBsiWwnLghbHUT5nZXhDXAKzmTBpSwCWgJoidmtJI1aIDUcRFYH0hSvPhadrl7hONlb+hnvuXEj8/dBro3IMMWlIO+5MSLJurZ7jbYtQECirDUn6ZYsUjA9ZsYvS3I9GIl8KdXRTHid9pY5SXBkwGymQvA254kxYu3ZLfzGsB/8b4kWcJycH7MGkN+ocz7mwM8GyB1XERY6DUvBizw8/JXX4vykmENwgY/uUWJsFHqWecnNciuiPnAmQD5xUIzMMdvsm8DJMMxhOf85hcNwjzJ+F81DLQvSDKsAZYHqdHFWSIZvgxSIPjGrDZeBvczvyIiQzOvBS0S2ADZzWW6MxM4FLRWF6KJDqbLftqDFjKyNVG2cZoSHgSOmKhX4Bwly0NuVrvcYGxvqNRxnCyTgOOmahYgRxFqZCe/mipodHOu7ORncjwA7DNZt0BoREhJxuwoN747WnZwgg4mABnTtfPI9yipILeb1yKU7emyi2ZKmIjwbhj1I0X4mDYmSUM4k87QzgdIHR2S4Q2UmXTNDb6nEGZIhjmym8thNQn9gIY0sJp2RiCsDbuXQb4lx8jOiWaoRHJCRn7gD8nwWOc7Jxqj6OmTQygzpZ6HZQcnomgY6RElaWArzYxGWADR/IGuEH5DeYVm7pMGVkfZOvIzYrKfdsnwIWXcDcwlvyOiEZhLbwZLA4tNzGy9EsefMmwB1sf+pwyvxpEj2rO8b0u15qhFpBYYRfBRmgP2/PNjnufOJBsGDZKLwdWaoaAM+D8tLS0V7bncSFSGiUgVUAX0F0gqJIE+XNkCcl6gRa98uk8BB1T1AKJN3ROJvclk0shzG4vFYrFYLBaLxWIxwd8xh5msGfXqKAAAAABJRU5ErkJggg=="/>
+						- Peru
+						</div>
+						<div *ngSwitchCase="'07'">
+							<img style="width: 27px; height: 27px;" alt="Paraguay" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAABmJLR0QA/wD/AP+gvaeTAAAMKUlEQVR4nO2daXBb13WAv/sAggsIkBTXcjNNWaIUarct0bQlUbFiS+NJLXliZeLY0ijtRJk0bjPJjOvp8iMzmUzSOm1+pE3sdsaO2+SH5SRWtJKWQsl2EzembFkyJYubCC6SSBAkQezbu/0B1ePUroAHPOBxwTeDXzjn3PPueXc79773IEeOHDly5MiRI0eOHEsNYbQDt6MXlqlwjwKbBDRLaCT+KwPygZJbom4gBMwAIwJGJAwJOC/hfCtMG3MFiZlXAeiBoiLYAeyW8BCwQifTfQJeB0744ew94NfJbtoYHgAJymVoB54CngCKM1xkEDgq4T+ccHIHRDNc3m0xLAA9UFQABwV8G7jTIDcGBfzQBi81QMAIB7IegH7ID8PTwDNAZbbL/3+YBH4A/LgVwtksOKsB6IV9wPcx7o5PxCDwbCu8mq0CsxKAXqgBfgLsyUZ5OnDCDF9tgfFMF5TxANy6639KfOq4kJgGvtYKhzNZSMYC0A3maviuhL/OVBlZ4gXg6UyNDRkJQC8sA44AD2TCvgGci8HedfGFnq7oHoAPoVaFkxLW6W3bYC6rsGstjOppVNcAXILlCnQDDXranUc4TLBjFVzTy6BuAbgKdVF4k/k7xdSLQRNsWwXX9TCmSwCuQLkKbwGr9LC3AOiNwVY9xgQlXQMSTCr8J0un8gFaTfBKN5jTNZR2AHrhOWBXunYWIDur4umLtEirC+qFR4HX0nViISPhC2vgl6nqpxyAfqgMwyWgOlUbiwSnCmvXwkQqyil3QWH4N3KVD1CpwL+kqpxSC7gMn5PQlWqhi5TdrXBKq5LmAPSCBbgItGjVXeRcCcD6eyCiRUlzFyTgz8lV/qexuhC+olVJUwvogbxC6Afu0FrQEmEEWKElc6qpBRTBAXKVfzsagS9rUdAUAAl/ocmdJYiAb2qRTzoAvbAF2KDZoyWGhHUfwL3Jyiedy7B+81ufJ+D7fWpuLS3UQuuj/Oif3klGNqlBWEppmpqduymgIj3Xlgyu8lJ7jRAi4aGvpLqgqdnZrbnK10S5c8ZzXzKCSY4ByqPpeJMJgsEgjtFRHKOjBINBo935BCahJlVnSY4BYgfIdPzRhdHRMXouXADAarVSVRFvlFf7B/B6vQghuHfjRurr64x0EwCJ6EhGLuEYcPPmTas5v3AWHTYfUiUYCnH0xClq/6SG+9u2MD0zg9M59UcyVZWVlJaW8F+/f5sbE5P86SO7yLfkG+QxANFoKFBaU1Pju51QwgBMzc5+FinO6OeXNpxTU5w6fYbH9+7BOelkzuvFZrcjFTORSHyMy8szo6gx5ubclNhsVFSUc/i1I+z+3E4qysuNch0VZXtVme2N28kkHAOEFOv1c0kbgUCQrtO/5ckv7qNvYABzfj5KQRGqUCjOtyDDQWQ4SHGBhZgQKAVFKHl59A0O8uQX93Hy9dMEAsaNDybUjYlkEgZAQrM+7mjnyPETPP7YHi729lJdXYs3GMZmMeNzzxLw+2hubqK5uQm/14vXPRP/LxShurqWi7297HtsD68dO26U+8gkTogkDoBguT7uaKN/YIiWFXcxfuMG1dU1zPn9yHCQkClAQU0elEhMioJJUZjOd3Hc/RtCSgAZDjLn91NdXcONmxOsblnJ1b5+Iy4BSFx3SXRBxiTfLvZ+wMb16/D7A8x4fBQIicVmomfmHY4PHqOqqOojWV/Eh0Tl+as/5VqsnwIhmfH48Pp8bFi3lkuXrxhxCYBsSiSRxDpAliSW0ZdoNEq+JZ/hkREqKioptdlwez28NvorLruu0FbbhsVkIRQOEQqHaK9r5+ubvsF0cIbD117F7fVQYiumurKasbFx8sxmIhFN+yQ6IeyJJJIIgLDq4YoWhkdGaWpqJBQM4QmEiIYC2CqKGHY7MAmFDTXxsc3Rd5aR/nMA2C02/u6+vwcpkfYoajiIOxDE5/fTfGcTo+MZP+r/aSR83i2ZlXDWAzDlclFZUQFCIKXE7/dTWVpJKBqio7EDn9vLuc5/xBr6JdbQq7zR9RwzM9OMe8fwhr04gg58Pj9SlSAElRUVOJ2ubF8G6BSArBONRMgzmwBQpQqAWTFTba3hvYn3KCtbxoo1e7Hnj2OzjLOidS9lZctYXrqcels92+q3AiBEfJljsZiJRLL66FfSJBOA267kMkH5snJcrlkAVFXFZDYjVMGayjX8bvx3TPgmcE44cPj34PDvYXLCAcBv+o/gCXsJhcOYzGbkrfSJ03mrRWUfbyKBJNIL0geiVA9vkqW+vo63//AOjQ31lBRbKSjIZ3DoGlVFVRSaC3G4h1m/5gHyLQ8CEA6HcQWnuTp9FYvZwpDDwV2NKwmFIvijYYaGh2nfsjmbl/C/JAxAMoOwWw9PtGArtuL1eVl+ZxMe9yyTrlliqkpbTRuPLH+EX/f/mqPXjn50hw96BvjL009TbLHxnfbvYDPbmHTN4pmdoamxAa/XS7E160MZIOcSSSRsAUIwLCWf0ceh5FlWVoZzykUkGqG5oYHCfAvvXnifPWv3sqW2jQ+nLvPSpZfIM5kJRUJ0NGxnW/12hq46uGfjRmY9PsbHRpl0Og3MB4mED3IkXglLhvRxRhvb7m/n7Jtv8pmWFgYGBxBCsGnDevr6B4nNSFqr1rB35V6+tPoJttS2sbP0YSKTKndviG9bD/T3s6plJd1vvMXW9qT2RjJBwrpL3AJg0IidACEE97e1cebsG7S3bebCxUusX7uG1tWr8Pn9jI6O4VWCTDCFWbVQ3VhFUWEhqqry/qUPWL1qJZ2nz9Detvmj2VDWryGJR5kSBkBFvSAMmq02NtTjmp7m7T/00LH1fj64fIUSu53GhnpWtaz8hPzI6Bhuj4e1a1rpPvcmtTU13HmHcceYYlK8m0hmQWzIDA0P89/v9LBr507MZjPj168jFAVxa6GGlEgpqaurIxIJc+r107RtvpfmpoSpmEwSCQd8pbW1tbd9NU5SbdM1435PGnwmKBaLcbr7LP5AgLraWla3tGArjs9sPB4vV/r6GL9+HWtREQ92bMdkMhnpLkBPRVlJwvNBSd3VKnQLgwNgMpl4eGd83j82fp2e8+/i8can2bbiYlauuIvNd28y0sU/Qkh5Nim5ZIScM57tAjUpgzniKFJsXbbM/lYiudzBrMzgKi+1VwshYokEk+qChBCxR/+m8/mhce9n0/dt8dNcV/zbI997OGHlg4aZTXfPxFEp5N+m7tbSwTEx91fJympaodgf/pnhs6EFwPuezgNJ15G25wOE+LF2f5YYQvxIi7imAHicgZeBYU0OLS0cHlvBL7QoaMsxnD8UkVL+gyadpYSU3+PwPk1bb5qTPF5X6N+BD7XqLX7kZY8r9KJWLe1ZtvOHImr8vZ85PoYQyrc4f0jz2ZeU0py+zgOngV+lorsYEfDK3Kn9nanoppxnlkrsa8DNVPUXEZOqFCn3CCkHwHvyK06BepD58OSGkUj+zNu1fzJV9bR2WuY6D54C/jkdGwsawXOergPH0jGR9laXx174DJIT6dpZaEhBl8dW+Gy6dnTZLC155OdlajTyFoisn54wBCkumcKxbbNnD86ma0q33Wrrg7+oVsyRcyz+N6kMxFC2+TufuqGHMd12231nnphQpNgNOPSyOQ8ZNpnMO/WqfND5cK67a/+1GMp9wPt62p0n9EYV09bZE1/W9QbT/byJv/OpG4rZvAPEYtrC7DaF1AcCJ58c09tw5k4sdXSbbfkj3yX+qRLDPxaUMkK84HEGvpFKmiEp85kw+nGKH/rZF4TgeeKvtF9ITEvJIW/XgYx+ziQrd+atGdK/Ao9lo7z0EcejefJQ4NiBhf8Jk49TvOvlx4SUPwDuyma5GuhHKs94up7K2tuAs983P/6KxT4X/LpEfRbEfHnx600B35+zF/5E64ZKuhg3OHa8WGCziP0I8W3gkydts0MfUv7QE5Yvc/agIe80mBezk5KHXrpbVZSvIuWXAFtGC5MEhOBYDF7wde4/A8LQbO68CMBHPP5KoX3Ot12Vpt1CyIeIpzXS9VECV6UUXYqInZyzW89xeJ8hny38NOZXAP4PpR0vlkYtpk1CkXcLKZulFI0I7iD+GVsr8dYigDkkfoR0g3AgGUHIIVVwPi8oz+uRNMuRI0eOHDly5MiRI0cOvfgf3+Aq1XU/uJMAAAAASUVORK5CYII="/>
+						- Paraguay
+						</div>
+						<div *ngSwitchCase="'08'">
+							<img style="width: 27px; height: 27px;" alt="Panama" src="data:image/png;base64,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"/>
+						- Panama
+						</div>
+					</div>
+				</td>
+				<td>
+					{{customer.canal}}
+				</td>
+				<td>
+					{{customer.sucursal}}
+				</td>
+				<td>
+					<div [ngSwitch]="customer.estatus">
+						<div *ngSwitchCase="'Procesadas'">
+							<p-tag severity="success" [rounded]="true">{{customer.estatus}}</p-tag>
+						</div>
+						<div *ngSwitchCase="'Pendientes'">
+							<p-tag severity="warning" [rounded]="true">{{customer.estatus}}</p-tag>
+						</div>
+						<div *ngSwitchDefault>
+							<p-tag severity="danger" [rounded]="true">{{customer.estatus}}</p-tag>
+						</div>
+					</div>
+					
+				</td>
+				<td>
+					{{customer.fechaActualizacion}}
+				</td>
+			</tr>
+		</ng-template>
+
 	<ng-template pTemplate="emptymessage">
 		<tr>
 			<td colspan="7">No customers found.</td>
 		</tr>
 	</ng-template>
 </p-table>
+</div>
+
+
+<br><br>
 
 <div class="card">
-    <h5>Basic</h5>
     <p-chart type="line" [data]="basicData" [options]="basicData"></p-chart>
 </div>

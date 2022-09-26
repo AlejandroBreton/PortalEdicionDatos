@@ -11,12 +11,17 @@ import { HomeComponent } from './components/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { CalendarModule } from 'primeng/calendar';
+import { SucursalesComponent } from './components/sucursales/sucursales.component';
+import { ParametrosComponent } from './components/parametros/parametros.component';
 
 
 @NgModule({
   declarations: [
     TerminalComponent,
     HomeComponent,
+    SucursalesComponent,
+    ParametrosComponent,
+    
     //CalendarModule
     //BrowserModule,
     //BrowserAnimationsModule,

@@ -5,14 +5,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { ApplicationsModule } from './applications/applications.module';
 
 import { AppComponent } from './app.component';
-import { ParametrosComponent } from './components/parametros/parametros.component';
-import { SucursalesComponent } from './component/sucursales/sucursales.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ParametrosComponent,
-    SucursalesComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,

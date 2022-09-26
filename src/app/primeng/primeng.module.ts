@@ -6,6 +6,8 @@ import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { ChartModule } from 'primeng/chart';
 import { TerminalModule } from 'primeng/terminal';
+import { DropdownModule } from 'primeng/dropdown';
+import { TagModule } from 'primeng/tag';
 
 @NgModule({
   declarations: [],
@@ -19,6 +21,8 @@ import { TerminalModule } from 'primeng/terminal';
     TableModule, 
     ChartModule,
     TerminalModule,
+    DropdownModule,
+    TagModule
   ]
 })
 export class PrimengModule { }

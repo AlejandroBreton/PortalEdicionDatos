@@ -1,26 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import {TerminalModule} from 'primeng/terminal';
-import {TerminalService} from 'primeng/terminal';
-import {Subscription}   from 'rxjs';
 import { MenuItem } from 'primeng/api';
 
-@Component({
-  selector: 'app-terminal',
-  templateUrl: './terminal.component.html',
-  styleUrls: ['./terminal.component.css'],
-  providers: [TerminalService]
-})
-export class TerminalComponent implements OnInit {
 
-  constructor(private terminalService: TerminalService) {
-    this.terminalService.commandHandler.subscribe(command => {
-        let response = (command === 'date') ? new Date().toDateString() : 'Unknown command: ' + command;
-        this.terminalService.sendResponse(response);
-    });
-  };
+@Component({
+  selector: 'app-parametros',
+  templateUrl: './parametros.component.html',
+  styleUrls: ['./parametros.component.css']
+})
+export class ParametrosComponent implements OnInit {
 
   items: MenuItem[] = [];
   loading: boolean = true;
+
+  constructor() { }
 
   ngOnInit() {
     this.items = [
@@ -36,6 +28,5 @@ export class TerminalComponent implements OnInit {
       { label: 'Terminal', icon: 'pi pi-fw pi-hashtag', routerLink: '/terminal' },
     ];
   }
-
 
 }
