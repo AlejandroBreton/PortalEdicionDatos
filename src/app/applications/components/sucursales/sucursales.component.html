@@ -3,84 +3,210 @@
     </ng-template>
 </p-menubar>
 
-<div class="p-field p-col-6 p-md-4">
-    <label for="icon">Ingresa el rango de fechas de consulta</label>
-    <p-calendar [(ngModel)]="rangeDates" selectionMode="range" [readonlyInput]="true" inputId="range"></p-calendar>
+<br>
+<div style="width: 85%; left: 7%; position: relative;"  >
+    <h3 style="text-align: center;">Sucursales</h3>
+    <br>
+    <div>
+        <p-button (click)="showDialogNewSucursal()" icon="pi pi-plus-circle" label="Nueva Sucursal"></p-button>
+
+    </div>
+    <br>
+
+    <p-table [value]="dummyObject">
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="id">Id <p-sortIcon field="fiTiendaId"></p-sortIcon></th>
+                <th pSortableColumn="nombre">Nombre <p-sortIcon field="fcDescTienda"></p-sortIcon></th>
+                <th pSortableColumn="ip">IP <p-sortIcon field="fcDirecIP"></p-sortIcon></th>
+                <th pSortableColumn="canal">Canal <p-sortIcon field="fiCanal"></p-sortIcon></th>
+                <th pSortableColumn="pais">Pais <p-sortIcon field="fiPais"></p-sortIcon></th>
+                <th pSortableColumn="estatus">Estatus <p-sortIcon field="fiStatus"></p-sortIcon></th>
+                <th pSortableColumn="destino">Destino <p-sortIcon field="fiTiendaDest"></p-sortIcon></th>
+                <th pSortableColumn="observaciones">Observaciones <p-sortIcon field="fcObservaciones"></p-sortIcon></th>
+                <th>Funciones</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+            <tr *ngFor="let item of dummyObject">
+                <td>{{item.fiTiendaId}}</td>
+                <td>{{item.fcDescTienda}}</td>
+                <td>{{item.fcDirecIP}}</td>
+                <td>{{item.fiCanal}}</td>
+                <td>{{item.fiPais}}</td>
+                <td>{{item.fiStatus}}</td>
+                <td>{{item.fiTiendaDest}}</td>
+                <td>{{item.fcObservaciones}}</td>
+                <td>
+                    <button class="btn btn-primary" (click)="showDialogEditSucursal(item.fiTiendaId)"><svg width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/></svg></button>
+                        <small>&nbsp;&nbsp;&nbsp;&nbsp;</small>
+                        <button class="btn btn-danger" (click)="fnDeleteRow(item.fiTiendaId)"><svg width="16" height="16" fill="currentColor" class="bi bi-trash2-fill" viewBox="0 0 16 16">
+                        <path d="M2.037 3.225A.703.703 0 0 1 2 3c0-1.105 2.686-2 6-2s6 .895 6 2a.702.702 0 0 1-.037.225l-1.684 10.104A2 2 0 0 1 10.305 15H5.694a2 2 0 0 1-1.973-1.671L2.037 3.225zm9.89-.69C10.966 2.214 9.578 2 8 2c-1.58 0-2.968.215-3.926.534-.477.16-.795.327-.975.466.18.14.498.307.975.466C5.032 3.786 6.42 4 8 4s2.967-.215 3.926-.534c.477-.16.795-.327.975-.466-.18-.14-.498-.307-.975-.466z"/>
+                      </svg></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
 </div>
 
-<h5>Tabla de consulta</h5>
-<p>Tabla Informativa</p>
+<!-- ***Dialogs*** -->
 
-<p-table #dt [value]="dummyObject" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
-    [rowsPerPageOptions]="[10,25,50]" styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-    [globalFilterFields]="['id','nombre','edad','color','activo']">
-    <ng-template pTemplate="caption">
-        <div class="p-d-flex">
-            <span class="p-input-icon-left p-ml-auto">
-                <i class="pi pi-search"></i>
-                <input pInputText type="text" (input)="fnApplyFilterGlobal($event, 'contains', dt)"
-                    placeholder="Search keyword" />
-            </span>
-        </div>
-    </ng-template>
-    <ng-template pTemplate="header">
-        <tr>
-            <th>
-                <div class="p-d-flex p-jc-between p-ai-center">
-                    ID
-                    <p-columnFilter type="text" field="id" display="menu"></p-columnFilter>
-                </div>
-            </th>
-            <th>
-                <div class="p-d-flex p-jc-between p-ai-center">
-                    Nombre
-                    <p-columnFilter type="text" field="nombre" display="menu"></p-columnFilter>
-                </div>
-            </th>
-            <th>
-                <div class="p-d-flex p-jc-between p-ai-center">
-                    Edad
-                    <p-columnFilter type="numeric" field="edad" display="menu"></p-columnFilter>
-                </div>
-            </th>
-            <th>
-                <div class="p-d-flex p-jc-between p-ai-center">
-                    Color
-                    <p-columnFilter type="text" field="color" display="menu"></p-columnFilter>
-                </div>
-            </th>
-            <th>
-                <div class="p-d-flex p-jc-between p-ai-center">
-                    Activo
-                    <p-columnFilter type="boolean" field="activo" display="menu"></p-columnFilter>
-                </div>
-            </th>
+<div>
+    <p-dialog header="Nueva Sucursal" [(visible)]="dialogNewSucursal" [modal]="true" [style]="{width: '50vw'}" [maximizable]="true" [baseZIndex]="10000"
+        [draggable]="false" [resizable]="false">
+        <p>Completa la información para agregar una nueva sucursal</p><br>
 
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-customer>
-        <tr>
-            <td>
-                {{customer.id}}
-            </td>
-            <td>
-                {{customer.nombre}}
-            </td>
-            <td>
-                {{customer.edad}}
-            </td>
-            <td>
-                {{customer.color}}
-            </td>
-            <td>
-                {{customer.activo}}
-            </td>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="emptymessage">
-        <tr>
-            <td colspan="7">No customers found.</td>
-        </tr>
-    </ng-template>
-</p-table>
+        <form>
+            <div class="mb-3 row">
+                <label for="idTienda" class="col-sm-2 col-form-label">ID Tienda</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" id="idTienda" placeholder="9676">
+                </div>
+              </div>
+
+              <div class="mb-3 row">
+                <label for="descripcion" class="col-sm-2 col-form-label">Nombre</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" id="descripcion" placeholder="MEGA ELEKTRA LA LUNA" >
+                </div>
+              </div>
+
+              <div class="mb-3 row">
+                <label for="ipTienda" class="col-sm-2 col-form-label">IP</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" id="ipTienda" placeholder="10.112.98.227" >
+                </div>
+              </div>
+
+              <div class="mb-2 row">
+                <label for="canal" class="col-sm-2 col-form-label">Canal</label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control" id="canal" placeholder="9" >
+                </div>
+
+                <label for="pais" class="col-sm-2 col-form-label">Pais</label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control" id="pais" placeholder="2" >
+                </div>
+              </div>
+
+              <div class="mb-3 row">
+                <label for="canal" class="col-sm-2 col-form-label">Estatus</label>
+                <div class="col-sm-7">
+                        <input type="radio" class="btn-check" name="options-outlined" id="success-outlined" autocomplete="off" checked >
+                        <label class="btn btn-outline-success" for="success-outlined">Activa</label>
+                        <small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</small>
+                        <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined" autocomplete="off" disabled> 
+                        <label class="btn btn-outline-danger" for="danger-outlined">Inactiva</label>
+                </div>
+
+              </div>
+
+              <div class="mb-3 row">
+                <label for="destino" class="col-sm-2 col-form-label">Destino</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" id="destino" placeholder="0355" >
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="observaciones" class="col-sm-2 col-form-label">Observaciones</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" id="observaciones" placeholder="Sucursal en proceso de migración" >
+                </div>
+              </div>
+
+        </form>
+
+            <ng-template pTemplate="footer">
+                <p-button icon="pi pi-save" (click)="fnSaveSucursal()" label="Guardar" class="p-button-text"></p-button>
+                <p-button icon="pi pi-times"(click)="dialogNewSucursal=false" label="Cancelar"></p-button>
+            </ng-template>
+    </p-dialog>
+</div>
+
+<div>
+
+    <p-dialog header="Edición de Sucursal" [(visible)]="dialogEditSucursal" [modal]="true" [style]="{width: '50vw'}" [maximizable]="true" [baseZIndex]="10000"
+        [draggable]="false" [resizable]="false">
+        <p>Edita los parametros de la sucursal</p><br>
+
+        <form>
+            <div class="mb-3 row">
+                <label for="idTienda" class="col-sm-2 col-form-label">ID Tienda</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" id="idTienda" [value]="idTienda" disabled  >
+                </div>
+              </div>
+
+              <div class="mb-3 row">
+                <label for="descripcion" class="col-sm-2 col-form-label">Nombre</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" id="descripcion" [value]="nombreTienda"  >
+                </div>
+              </div>
+
+              <div class="mb-3 row">
+                <label for="ipTienda" class="col-sm-2 col-form-label">IP</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" id="ipTienda"  [value]="ipTienda"  >
+                </div>
+              </div>
+
+              <div class="mb-2 row">
+                <label for="canal" class="col-sm-2 col-form-label">Canal</label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control" id="canal" [value]="canalTienda"  >
+                </div>
+
+                <label for="pais" class="col-sm-2 col-form-label">Pais</label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control" id="pais" [value]="paisTienda"  >
+                </div>
+              </div>
+
+              <div class="mb-3 row">
+                <label for="destino" class="col-sm-2 col-form-label">Destino</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" id="destino" [value]="destinoTienda">
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="observaciones" class="col-sm-2 col-form-label">Observaciones</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" id="observaciones" [value]="observacionesTienda">
+                </div>
+              </div>
+
+        </form>
+
+            <ng-template pTemplate="footer">
+                <p-button icon="pi pi-save" (click)="fnEditRow(idTienda)" label="Guardar" class="p-button-text"></p-button>
+                <p-button icon="pi pi-times" (click)="dialogEditSucursal=false" label="Cancelar"></p-button>
+            </ng-template>
+    </p-dialog>
+</div>
+
+<!-- Alerts -->
+<p-toast></p-toast>
+<p-toast position="top-left" key="tl"></p-toast>
+<p-toast position="bottom-center" key="c" (onClose)="onReject()" [baseZIndex]="5000">
+  <ng-template let-message pTemplate="message">
+      <div class="p-flex p-flex-column" style="flex: 1">
+          <div class="p-text-center">
+              <i class="pi pi-exclamation-triangle" style="font-size: 3rem"></i>
+              <h4>{{message.summary}}</h4>
+              <p>{{message.detail}}</p>
+          </div>
+          <div class="p-grid p-fluid">
+              <div class="p-col-6">
+                  <button type="button" pButton (click)="onConfirm()" label="Yes" class="p-button-success"></button>
+              </div>
+              <div class="p-col-6">
+                  <button type="button" pButton (click)="onReject()" label="No" class="p-button-secondary"></button>
+              </div>
+          </div>
+      </div>
+  </ng-template>
+</p-toast>
+

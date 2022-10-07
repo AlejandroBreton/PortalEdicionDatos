@@ -15,6 +15,7 @@ import { SucursalesComponent } from './components/sucursales/sucursales.componen
 import { ParametrosComponent } from './components/parametros/parametros.component';
 
 
+
 @NgModule({
   declarations: [
     TerminalComponent,

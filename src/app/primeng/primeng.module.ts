@@ -8,6 +8,8 @@ import { ChartModule } from 'primeng/chart';
 import { TerminalModule } from 'primeng/terminal';
 import { DropdownModule } from 'primeng/dropdown';
 import { TagModule } from 'primeng/tag';
+import { DialogModule } from 'primeng/dialog';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [],
@@ -22,7 +24,9 @@ import { TagModule } from 'primeng/tag';
     ChartModule,
     TerminalModule,
     DropdownModule,
-    TagModule
+    TagModule,
+    DialogModule,
+    ToastModule
   ]
 })
 export class PrimengModule { }

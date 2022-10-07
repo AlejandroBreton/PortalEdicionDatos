@@ -17,7 +17,6 @@ export class HomeComponent implements OnInit {
   //Dummy Data
   dummyObject: any[] = [
    
-    { 'pais': '02', 'canal': '09', 'sucursal': 4410, 'estatus': 'Pendientes', 'fechaActualizacion': '02/07/2022' },
     { 'pais': '02', 'canal': '01', 'sucursal': 352,  'estatus': 'Procesadas', 'fechaActualizacion': '01/07/2022' },
     { 'pais': '04', 'canal': '09', 'sucursal': 9676, 'estatus': 'Error',      'fechaActualizacion': '02/11/2022' },
     { 'pais': '07', 'canal': '09', 'sucursal': 4401, 'estatus': 'Error',      'fechaActualizacion': '02/07/2022' },
@@ -29,6 +28,7 @@ export class HomeComponent implements OnInit {
     { 'pais': '04', 'canal': '01', 'sucursal': 4410, 'estatus': 'Procesadas', 'fechaActualizacion': '02/07/2022' },
     { 'pais': '04', 'canal': '01', 'sucursal': 352,  'estatus': 'Procesadas', 'fechaActualizacion': '02/07/2022' },
     { 'pais': '04', 'canal': '09', 'sucursal': 2229, 'estatus': 'Procesadas', 'fechaActualizacion': '02/07/2022' },
+    { 'pais': '02', 'canal': '09', 'sucursal': 4410, 'estatus': 'Pendientes', 'fechaActualizacion': '02/07/2022' },
     { 'pais': '02', 'canal': '01', 'sucursal': 4410, 'estatus': 'Procesadas', 'fechaActualizacion': '02/07/2022' },
     { 'pais': '02', 'canal': '09', 'sucursal': 9676, 'estatus': 'Error',      'fechaActualizacion': '02/07/2022' },
     { 'pais': '07', 'canal': '09', 'sucursal': 9676, 'estatus': 'Procesadas', 'fechaActualizacion': '02/07/2022' },
@@ -42,6 +42,36 @@ export class HomeComponent implements OnInit {
     { 'pais': '02', 'canal': '09', 'sucursal': 9676, 'estatus': 'Procesadas', 'fechaActualizacion': '02/07/2022' },
     { 'pais': '07', 'canal': '09', 'sucursal': 9676, 'estatus': 'Procesadas', 'fechaActualizacion': '02/07/2022' },
     { 'pais': '02', 'canal': '01', 'sucursal': 4410, 'estatus': 'Procesadas', 'fechaActualizacion': '02/07/2022' }
+
+  ];
+
+  dummyObject2: any[] = [
+   
+    { 'pais': '02', 'canal': '01', 'sucursal': 352,  'solicitud': 561, 'estatus': 'Procesadas', 'fechaActualizacion': '01/07/2022' },
+    { 'pais': '04', 'canal': '09', 'sucursal': 9676, 'solicitud': 562, 'estatus': 'Error',      'fechaActualizacion': '02/11/2022' },
+    { 'pais': '07', 'canal': '09', 'sucursal': 4401, 'solicitud': 563, 'estatus': 'Error',      'fechaActualizacion': '02/07/2022' },
+    { 'pais': '07', 'canal': '09', 'sucursal': 751,  'solicitud': 564, 'estatus': 'Error',      'fechaActualizacion': '02/07/2022' },
+    { 'pais': '04', 'canal': '09', 'sucursal': 4410, 'solicitud': 566, 'estatus': 'Error',      'fechaActualizacion': '02/07/2022' },
+    { 'pais': '04', 'canal': '01', 'sucursal': 4410, 'solicitud': 564, 'estatus': 'Error',      'fechaActualizacion': '02/07/2022' },
+    { 'pais': '04', 'canal': '01', 'sucursal': 9676, 'solicitud': 560, 'estatus': 'Procesadas', 'fechaActualizacion': '02/07/2022' },
+    { 'pais': '04', 'canal': '01', 'sucursal': 4410, 'solicitud': 563, 'estatus': 'Error',      'fechaActualizacion': '02/07/2022' },
+    { 'pais': '04', 'canal': '01', 'sucursal': 4410, 'solicitud': 569, 'estatus': 'Procesadas', 'fechaActualizacion': '02/07/2022' },
+    { 'pais': '04', 'canal': '01', 'sucursal': 352,  'solicitud': 526, 'estatus': 'Procesadas', 'fechaActualizacion': '02/07/2022' },
+    { 'pais': '04', 'canal': '09', 'sucursal': 2229, 'solicitud': 156, 'estatus': 'Procesadas', 'fechaActualizacion': '02/07/2022' },
+    { 'pais': '02', 'canal': '09', 'sucursal': 4410, 'solicitud': 526, 'estatus': 'Pendientes', 'fechaActualizacion': '02/07/2022' },
+    { 'pais': '02', 'canal': '01', 'sucursal': 4410, 'solicitud': 516, 'estatus': 'Procesadas', 'fechaActualizacion': '02/07/2022' },
+    { 'pais': '02', 'canal': '09', 'sucursal': 9676, 'solicitud': 546, 'estatus': 'Error',      'fechaActualizacion': '02/07/2022' },
+    { 'pais': '07', 'canal': '09', 'sucursal': 9676, 'solicitud': 555, 'estatus': 'Procesadas', 'fechaActualizacion': '02/07/2022' },
+    { 'pais': '02', 'canal': '09', 'sucursal': 751,  'solicitud': 596, 'estatus': 'Procesadas', 'fechaActualizacion': '02/07/2022' },
+    { 'pais': '07', 'canal': '01', 'sucursal': 4410, 'solicitud': 856, 'estatus': 'Pendientes', 'fechaActualizacion': '02/07/2022' },
+    { 'pais': '02', 'canal': '01', 'sucursal': 4410, 'solicitud': 956, 'estatus': 'Pendientes', 'fechaActualizacion': '02/07/2022' },
+    { 'pais': '04', 'canal': '01', 'sucursal': 352,  'solicitud': 506, 'estatus': 'Pendientes', 'fechaActualizacion': '02/07/2022' },
+    { 'pais': '04', 'canal': '01', 'sucursal': 4410, 'solicitud': 576, 'estatus': 'Procesadas', 'fechaActualizacion': '02/07/2022' },
+    { 'pais': '04', 'canal': '01', 'sucursal': 4410, 'solicitud': 586, 'estatus': 'Procesadas', 'fechaActualizacion': '02/07/2022' },
+    { 'pais': '02', 'canal': '09', 'sucursal': 9676, 'solicitud': 568, 'estatus': 'Procesadas', 'fechaActualizacion': '02/07/2022' },
+    { 'pais': '02', 'canal': '09', 'sucursal': 9676, 'solicitud': 567, 'estatus': 'Procesadas', 'fechaActualizacion': '02/07/2022' },
+    { 'pais': '07', 'canal': '09', 'sucursal': 9676, 'solicitud': 856, 'estatus': 'Procesadas', 'fechaActualizacion': '02/07/2022' },
+    { 'pais': '02', 'canal': '01', 'sucursal': 4410, 'solicitud': 563, 'estatus': 'Procesadas', 'fechaActualizacion': '02/07/2022' }
 
   ];
 
