@@ -4,18 +4,16 @@ import { MenuItem, SortEvent, PrimeNGConfig, MessageService } from 'primeng/api'
 import { CalendarModule } from 'primeng/calendar';
 import { elementAt } from 'rxjs';
 
-
  interface Sucursal {
-  fiTiendaId?:      string,
+  fiTiendaId?:      number,
   fcDescTienda ?:   string,
   fcDirecIP?:       string,
-  fiCanal?:         string,
-  fiPais?:          string,
-  fiTiendaDest?:    string,
-  fcObservaciones?: string
+  fiCanal?:         number,
+  fiPais?:          number,
+  fiStatus?:        number,
+  fiTiendaDest?:    number,
+  fcObservaciones?: string,
  }
-
- editSucursal : FormGroup;
 
 @Component({
   selector: 'app-sucursales',
@@ -27,22 +25,12 @@ export class SucursalesComponent implements OnInit {
 
   rangeDates ?: Date[];
   items: MenuItem[] = [];
-  loading: boolean = true;
-  idTienda           ?: string;
-  nombreTienda       ?: string;
-  ipTienda           ?: string;
-  canalTienda        ?: string;
-  paisTienda         ?: string;
-  destinoTienda      ?: string;
-  observacionesTienda?: string;
-
-  nuevaSucursal ?: Sucursal = {};
-  
+  infoSucursal : Sucursal;
 
   flagEstatusCheck: any;
 
     //Dummy Data
-    dummyObject: any[] =  [
+    dummyObject: Sucursal[] =  [
     {
         "fiTiendaId": 1,
         "fcDescTienda": "Sucursal ficticias",
@@ -147,19 +135,45 @@ export class SucursalesComponent implements OnInit {
       dialogNewSucursal ?: boolean;
       dialogEditSucursal ?: boolean;
 
-  fnShowInfoEdit(id: any){
+  fnTestSubmit(){
+    
+    // this.infoSucursal{
+    //     fiTiendaId : 295
+    //     fcDescTienda : "Tienda Reforma"
+    //     fcDirecIP : "111.222.333.444"
+    //     fiCanal : 99
+    //     fiPais : 2
+    //     fiStatus : 1
+    //     fiTiendaDest : "9676"
+    //     fcObservaciones : "Alguna"
+    // }
+    this.infoSucursal.fiTiendaId;
+    this.infoSucursal.fcDescTienda;
+    this.infoSucursal.fcDirecIP;
+    this.infoSucursal.fiCanal;
+    this.infoSucursal.fiPais;
+    this.infoSucursal.fiStatus = 1;
+    this.infoSucursal.fcDescTienda;
+    this.infoSucursal.fcObservaciones;
+    
+    this.dummyObject.push(this.infoSucursal);
+    console.log(this.dummyObject);
+    this.showDialogSuccess("Sucursal Agregada");
+  }
+
+  fnShowInfoEdit(id: number){
     for( let i : number = 0; i<= this.dummyObject.length ; i++){
       console.log(this.dummyObject[i]);
       
       if(this.dummyObject[i].fiTiendaId == id){
 
-        this.idTienda           = this.dummyObject[i].fiTiendaId;
-        this.nombreTienda       = this.dummyObject[i].fcDescTienda;
-        this.ipTienda           = this.dummyObject[i].fcDirecIP;
-        this.canalTienda        = this.dummyObject[i].fiCanal;
-        this.paisTienda         = this.dummyObject[i].fiPais;
-        this.destinoTienda      = this.dummyObject[i].fiTiendaDest;
-        this.observacionesTienda= this.dummyObject[i].fcObservaciones;
+        this.infoSucursal.fiTiendaId = this.dummyObject[i].fiTiendaId;
+        this.infoSucursal.fcDescTienda = this.dummyObject[i].fcDescTienda;
+        this.infoSucursal.fcDirecIP = this.dummyObject[i].fcDirecIP;
+        this.infoSucursal.fiCanal = this.dummyObject[i].fiCanal;
+        this.infoSucursal.fiPais = this.dummyObject[i].fiPais;
+        this.infoSucursal.fiTiendaDest = this.dummyObject[i].fiTiendaDest;
+        this.infoSucursal.fcObservaciones = this.dummyObject[i].fcObservaciones;
 
         if(this.dummyObject[i].fiStatus == 1){
           this.flagEstatusCheck = true;
@@ -184,23 +198,23 @@ export class SucursalesComponent implements OnInit {
       //console.log("id" + this.idTienda + "... Nombre " +this.nombreTienda + " ... IP "+ this.ipTienda);
       
       if(this.dummyObject[i].fiTiendaId == id){
-        console.log(this.dummyObject[i]);
-        console.log(this.idTienda);
-        this.dummyObject[i].fiTiendaId = this.idTienda;
-        console.log(this.dummyObject[i].fiTiendaId);
+        // console.log(this.dummyObject[i]);
+        // console.log(this.idTienda);
+        // this.dummyObject[i].fiTiendaId = this.idTienda;
+        // console.log(this.dummyObject[i].fiTiendaId);
         
 
-        console.log(this.dummyObject[i]);
-        console.log(this.nombreTienda);
-        this.dummyObject[i].fcDescTienda = this.nombreTienda;
-        console.log(this.dummyObject[i].fcDescTienda);
+        // console.log(this.dummyObject[i]);
+        // console.log(this.nombreTienda);
+        // this.dummyObject[i].fcDescTienda = this.nombreTienda;
+        // console.log(this.dummyObject[i].fcDescTienda);
 
-        this.dummyObject[i].fcDirecIP = this.ipTienda;
-        this.dummyObject[i].fiCanal = this.canalTienda;
-        this.dummyObject[i].fiPais = this.paisTienda;
-        this.dummyObject[i].fiStatus = 1;
-        this.dummyObject[i].fiTiendaDest = this.destinoTienda;
-        this.dummyObject[i].fcObservaciones = this.observacionesTienda;
+        // this.dummyObject[i].fcDirecIP = this.ipTienda;
+        // this.dummyObject[i].fiCanal = this.canalTienda;
+        // this.dummyObject[i].fiPais = this.paisTienda;
+        // this.dummyObject[i].fiStatus = 1;
+        // this.dummyObject[i].fiTiendaDest = this.destinoTienda;
+        // this.dummyObject[i].fcObservaciones = this.observacionesTienda;
 
         this.showDialogSuccess("Edición de sucursal");
         this.dialogEditSucursal=false;
